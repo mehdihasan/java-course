@@ -19,11 +19,25 @@ With Ant and Gradle every time you enter a project there is its own custom set o
 
 # Step 1 - Getting Acquainted
 
-- Read about dependencies and transitive dependencies
-  > There are two types of Maven dependencies: (a) Direct: dependencies defined in pom.xml file under the <dependencies/> section. (b) Transitive: dependencies that are dependencies of direct dependencies. [[1](https://maven.apache.org/guides/introduction/introduction-to-dependency-mechanism.html)]
-- Learn what Super POM is and what Effective POM is
-  > POM: Project Object Model. The POM file we declare in our maven project is called **the Simplest POM**. All simplest POM files has been inherits from another file named **Super POM**, similar as all java files inherited from java.lang.object file. There are set of default configurations declared in the default POM which we can change in out Simplest POM. **Effective POM** is the merged version of the Super POM & Simplest POM. [[1](https://books.sonatype.com/mvnref-book/reference/pom-relationships-sect-pom.html#ex-super-pom)]
-- Read about `packaging` and create a project with one module that has `packaging=war`
+- Read about dependencies and transitive dependencies [[1](https://maven.apache.org/guides/introduction/introduction-to-dependency-mechanism.html)]
+  > There are two types of Maven dependencies: (a) Direct: dependencies defined in pom.xml file under the <dependencies/> section. (b) Transitive: dependencies that are dependencies of direct dependencies.
+- Learn what Super POM is and what Effective POM is [[1](https://books.sonatype.com/mvnref-book/reference/pom-relationships-sect-pom.html#ex-super-pom)]
+  > POM: Project Object Model. The POM file we declare in our maven project is called **the Simplest POM**. All simplest POM files has been inherits from another file named **Super POM**, similar as all java files inherited from java.lang.object file. There are set of default configurations declared in the default POM which we can change in out Simplest POM. **Effective POM** is the merged version of the Super POM & Simplest POM.
+- Read about `packaging` and create a project with one module that has `packaging=war` [[1](http://maven.apache.org/guides/introduction/introduction-to-the-lifecycle.html)]
+  > **packaging** is one of the phase of **default** **_maven build lifecycle_**. There are three built-in lifecycles:  
+  > a) default: there are couple of **build phases/stages** for the default lifecycle: (**VCTPVID**)  
+  > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; i) **validate** - validate the project is correct and all necessary information is available  
+  > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ii) **compile** - compile the source code of the project  
+  > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; iii) **test** - test the compiled source code using a suitable unit testing framework. These tests should not require the code be packaged or deployed  
+  > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; iv) **package** - take the compiled code and package it in its distributable format, such as a JAR.  
+  > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; v) **verify** - run any checks on results of integration tests to ensure quality criteria are met  
+  > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; vi) **install** - install the package into the local repository, for use as a dependency in other projects locally  
+  > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; vii) **deploy** - done in the build environment, copies the final package to the remote repository for sharing with other developers and projects.  
+  > b) clean,  
+  > c) site
+  >
+  > A particular type of packagin (by defining `<package>` in POM file) can effect build lifecycle of a project. Each type of packaging(`jar`, `war`, `ear`, `rar`, `ejb`, `pom` etc) can contains a list of **plugin goals** to bind to a particular phase. If we want to add additional custom goals into our build phases, other than the default goals, we can define those into the `<build<pluginManagement><plugins><plugin>` section of the POM file.
+- HOW ABOUT KNOWING `PLUGIN GOALS` / [PLUGIN BINDINGS](http://maven.apache.org/ref/3.6.3/maven-core/default-bindings.html)?
 - Add a dependency `org.testng:testng:6.10`
 - Add any Java class to your `src/main/java` and an XML file to your `src/main/resources`. And do the same in
   `src/test/xxx` dirs.
