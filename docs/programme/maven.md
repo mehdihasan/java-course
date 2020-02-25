@@ -47,11 +47,21 @@ With Ant and Gradle every time you enter a project there is its own custom set o
 _Check yourself_. You must be able to:
 
 - Run `mvn install` successfully
-- List all the dependencies that your project has (including transitives) with one command
+- List all the dependencies that your project has (including transitives) with one command  
+  To see the POM file
+
+```bash
+mvn dependency:tree
+```
+
 - Explore Effective POM and find all the default sections that were applied to your project. Even those that you didn't
   explicitly write.
 
-_Tip_: dependency tree and Effective POM are the most important diagnostic tools that you need. Every time there is
+```bash
+mvn help:effective-pom
+```
+
+**_Tip_**: dependency tree and Effective POM are the most important diagnostic tools that you need. Every time there is
 an issue these 2 tools are there to help. Your IDE probably has means to generate both of them - try to find the
 shortcuts, you'll need this often.
 
