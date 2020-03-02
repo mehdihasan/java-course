@@ -67,7 +67,7 @@ shortcuts, you'll need this often.
 
 # Step 2 - Lifecycle, phases, plugins
 
-- Learn what Plugins are and what is a `goal` ([link](./articles/maven-plugins.md))
+- Learn what Plugins are and what is a `goal` ([link](./articles/maven-plugins.md)) [[1](https://www.logicbig.com/tutorials/build-tools/apache-maven/maven-lifecycle-phases-goals.html)]
 - Read and learn what is a lifecycle and which lifecycles Maven has. Explore which phases each of the lifecycle has.
   ([link](./articles/maven-lifecycles-n-phases.md))
 - Declare `maven-surefire-plugin` and bind its `test` goal to a `test` phase
