@@ -291,6 +291,26 @@
 
         <plugins>
             <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-toolchains-plugin</artifactId>
+                <version>3.0.0</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>toolchain</goal>
+                        </goals>
+                        <configuration>
+                            <toolchains>
+                                <jdk>
+                                    <version>8</version>
+                                </jdk>
+                            </toolchains>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
                 <groupId>com.spotify</groupId>
                 <artifactId>dockerfile-maven-plugin</artifactId>
                 <version>1.4.13</version>
@@ -306,11 +326,21 @@
                 <configuration>
                     <repository>docker.io/mehdihasan/${project.artifactId}</repository>
                     <tag>${project.version}</tag>
+                    <useMavenSettingsForAuth>true</useMavenSettingsForAuth>
                     <buildArgs>
-                        <JAR_FILE>C:\Users\mdmehdi.hasan\MyWorkspace\java-course\target\${project.build.finalName}.jar</JAR_FILE>
+                        <JAR_FILE>${project.build.finalName}.war</JAR_FILE>
                     </buildArgs>
                 </configuration>
             </plugin>
         </plugins>
     </build>
+
+    <distributionManagement>
+        <repository>
+            <uniqueVersion>false</uniqueVersion>
+            <id>corp1</id>
+            <name>Corporate Repository</name>
+            <layout>default</layout>
+        </repository>
+    </distributionManagement>
 </project>
