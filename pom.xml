@@ -328,7 +328,7 @@
                     <tag>${project.version}</tag>
                     <useMavenSettingsForAuth>true</useMavenSettingsForAuth>
                     <buildArgs>
-                        <JAR_FILE>${project.build.finalName}.war</JAR_FILE>
+                        <JAR_FILE>${project.build.finalName}.${project.packaging}</JAR_FILE>
                     </buildArgs>
                 </configuration>
             </plugin>
