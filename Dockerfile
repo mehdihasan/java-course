@@ -1,6 +1,6 @@
 FROM openjdk:8-jre
 MAINTAINER mehdi <mail@mehdihasan.me>
-ENTRYPOINT ["/usr/bin/java", "-jar", "/usr/share/myapp/app.war"]
+ENTRYPOINT ["java", "-jar", "/usr/share/myapp/app.war"]
 # Add Maven dependencies (not shaded into the artifact; Docker-cached)
 # ADD target/lib           /usr/share/myapp/lib
 # Add the service itself
