@@ -14,8 +14,9 @@
         <targetJdk>1.8</targetJdk>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <spring.version>4.3.5.RELEASE</spring.version>
-        <rest-assured.version>2.9.0</rest-assured.version>
+        <rest-assured.version>4.4.0</rest-assured.version>
         <slf4j.version>1.7.13</slf4j.version>
+        <jackson.version>2.12.5</jackson.version>
     </properties>
 
     <dependencies>
@@ -96,11 +97,11 @@
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>com.jayway.restassured</groupId>
+            <groupId>io.rest-assured</groupId>
             <artifactId>rest-assured</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.jayway.restassured</groupId>
+            <groupId>io.rest-assured</groupId>
             <artifactId>spring-mock-mvc</artifactId>
         </dependency>
 
@@ -131,12 +132,12 @@
                 <!--Is used by Spring MVC to convert objects to/from JSON or XML-->
                 <groupId>com.fasterxml.jackson.core</groupId>
                 <artifactId>jackson-databind</artifactId>
-                <version>2.9.10.3</version>
+                <version>${jackson.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.fasterxml.jackson.datatype</groupId>
                 <artifactId>jackson-datatype-jsr310</artifactId>
-                <version>2.9.9</version>
+                <version>${jackson.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.hibernate</groupId>
@@ -155,7 +156,7 @@
                 should measure the real performance metrics and replace it with manual validation if it's really slow-->
                 <groupId>org.hibernate</groupId>
                 <artifactId>hibernate-validator</artifactId>
-                <version>5.3.4.Final</version>
+                <version>5.3.6.Final</version>
             </dependency>
             <dependency>
                 <!--EL API/Impl is needed at least by Hibernate Validator for message interpolation to work (resolving
@@ -219,7 +220,7 @@
                 future we may want to switch to it.-->
                 <groupId>ch.qos.logback</groupId>
                 <artifactId>logback-classic</artifactId>
-                <version>1.1.7</version>
+                <version>1.2.0</version>
                 <scope>runtime</scope>
             </dependency>
             <dependency>
@@ -254,13 +255,13 @@
                 <version>3.4.3</version>
             </dependency>
             <dependency>
-                <groupId>com.jayway.restassured</groupId>
+                <groupId>io.rest-assured</groupId>
                 <artifactId>rest-assured</artifactId>
                 <version>${rest-assured.version}</version>
                 <scope>test</scope>
             </dependency>
             <dependency>
-                <groupId>com.jayway.restassured</groupId>
+                <groupId>io.rest-assured</groupId>
                 <artifactId>spring-mock-mvc</artifactId>
                 <version>${rest-assured.version}</version>
                 <scope>test</scope>
@@ -284,6 +285,18 @@
                     <configuration>
                         <source>${sourceJdk}</source>
                         <target>${targetJdk}</target>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <artifactId>maven-surefire-plugin</artifactId>
+                    <version>2.22.2</version>
+                    <configuration>
+                        <!-- Since Java9 private fields/methods aren't available even if setAccessible(true). We need to
+                         explicitly export modules' internals to other modules. Since we're not actually using modules yet,
+                          all the code is started in the unnamed module, hence ALL-UNNAMED -->
+                        <argLine>-Duser.language=en -Duser.region=US
+                            --add-opens java.base/java.time=ALL-UNNAMED
+                            --add-opens java.base/java.lang=ALL-UNNAMED</argLine>
                     </configuration>
                 </plugin>
             </plugins>
