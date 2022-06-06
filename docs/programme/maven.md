@@ -67,43 +67,34 @@ shortcuts, you'll need this often.
 
 # Step 2 - Lifecycle, phases, plugins
 
-- Learn what Plugins are and what is a `goal` ([link](./articles/maven-plugins.md)) [[1](https://www.logicbig.com/tutorials/build-tools/apache-maven/maven-lifecycle-phases-goals.html)]
-- Read and learn what is a lifecycle and which lifecycles Maven has. Explore which phases each of the lifecycle has.
-  ([link](./articles/maven-lifecycles-n-phases.md))
-- Declare `maven-surefire-plugin` and bind its `test` goal to a `test` phase
-- Explore files
-  [default-bindings.xml](https://github.com/apache/maven/blob/master/maven-core/src/main/resources/META-INF/plexus/default-bindings.xml) and
-  [components.xml](https://github.com/apache/maven/blob/master/maven-core/src/test/resources/META-INF/plexus/components.xml) -
-  these files contain default plugins
-- Ensure that what you see in `default-bindings.xml` is what's listed in your Effective POM
+* Learn what Plugins are and what is a `goal` ([link](./articles/maven-plugins.md))
+* Read and learn what is a lifecycle and which lifecycles Maven has. Explore which phases each of the lifecycle has.
+([link](./articles/maven-lifecycles-n-phases.md))
+* Declare `maven-surefire-plugin` and bind its `test` goal to a `test` phase
+* Explore Java files in [packaging](https://github.com/apache/maven/tree/master/maven-core/src/main/java/org/apache/maven/lifecycle/providers/packaging) package inside Maven - these files contain default bindings of plugins
+* Ensure that what you see there is what's listed in your Effective POM
 
 _Check yourself_. You must be able to:
 
-- Find a connection between packaging and the default plugins that are declared for it
-- Find packaging and its configuration in `default-bindings.xml`
-- Inspect in console which plugins and executions are run during `mvn install`. Does this match to what you see in
-  Effective POM?
+* Find a connection between packaging and the default plugins that are declared for it
+* Inspect in console which plugins and executions are run during `mvn install`. Does this match to what you see in 
+Effective POM?
 
 _Pro_: Note that `maven-compiler-plugin` is declared with `default-compile` execution for `packaging=war`. You inherit
 it, but can you cancel it in your POM? Hint: you can, but find out how.
 
 # Step 3 - Debugging
 
-- Create a unit test with `assertTrue(true)` statement. Put a breakpoint on this line. Find a way to debug the tests
-  that are run by `maven-surefire-plugin` (hint: look for info about forks in Surefire).
-- Run `mvn install` and pick any random line in the output. Find the source code that prints the output (could be
-  Maven core parts or one of plugins). Debug (`mvnDebug` utility that comes with Maven) should help with this.
-- Think: given some code writes something into console, what would be a systematic way of finding which class/method
-  does this?
+* Read about what [Debugging is and how it works](./articles/maven-debug.md)
+* Read about [Surefire & forks](./articles/maven-surefire-n-forks.md)
+* Create a unit test with `assertTrue(true)` statement. Put a breakpoint on this line. Find a way to debug the tests
+that are run by `maven-surefire-plugin` (hint: look for info about forks in Surefire).
+* Run `mvn install` and pick any random line in the output. Find the source code that prints the output (could be
+Maven core parts or one of plugins). Debug (`mvnDebug` utility that comes with Maven) should help with this.
+* Think: if some code writes something into console, what would be a systematic way of finding which class/method
+does this?
 
-_Tip_: How does Remote Debugging work? This is a client-server interaction where server (JVM that's debugged)
-communicates with the client (IDE) sending the information like current line of code executed in every thread,
-variables, etc. Client (IDE) can ask the server to stop the execution of the program and receive some alternatives
-commands. Note, that if the binary that you debug is built not from the code that you look at - the lines of code won't
-match and the IDE won't stop at the places where you would expect but will stop at lines with JavaDocs for instance.
-So make sure your binary was built from the sources at hand.
-
-_Tip_: Often if we don't understand how things work instead of googling and guessing it's much (much!) easier to read
+*Tip*: Often if we don't understand how things work instead of googling and guessing it's much (much!) easier to read
 the source code of the tool. If the code is not simple - debugging becomes a real life saver. Have it as a habit to work
 with the sources of the tools instead of googling - you'll have a much better grip on the technologies.
 
