@@ -1,4 +1,4 @@
-FROM openjdk:8-jre
+FROM openjdk:17-jre
 MAINTAINER mehdi <mail@mehdihasan.me>
 ENTRYPOINT ["java", "-jar", "/usr/share/myapp/app.war"]
 # Add Maven dependencies (not shaded into the artifact; Docker-cached)
