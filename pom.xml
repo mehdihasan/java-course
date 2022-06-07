@@ -10,8 +10,8 @@
     <packaging>war</packaging>
 
     <properties>
-        <sourceJdk>16</sourceJdk>
-        <targetJdk>16</targetJdk>
+        <sourceJdk>17</sourceJdk>
+        <targetJdk>17</targetJdk>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <spring.version>4.3.5.RELEASE</spring.version>
         <rest-assured.version>4.4.0</rest-assured.version>
@@ -321,7 +321,7 @@
                         <configuration>
                             <toolchains>
                                 <jdk>
-                                    <version>8</version>
+                                    <version>${sourceJdk}</version>
                                 </jdk>
                             </toolchains>
                         </configuration>
