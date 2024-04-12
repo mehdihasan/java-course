@@ -6,17 +6,17 @@
 
     <groupId>io.qala.java-training</groupId>
     <artifactId>java-training</artifactId>
-    <version>2-SNAPSHOT</version>
+    <version>1-SNAPSHOT</version>
     <packaging>war</packaging>
 
     <properties>
-        <sourceJdk>21</sourceJdk>
-        <targetJdk>21</targetJdk>
+        <sourceJdk>11</sourceJdk>
+        <targetJdk>11</targetJdk>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <spring.version>6.1.5</spring.version>
-        <rest-assured.version>5.4.0</rest-assured.version>
-        <slf4j.version>2.0.12</slf4j.version>
-        <jackson.version>2.17.0</jackson.version>
+        <spring.version>5.2.20.RELEASE</spring.version>
+        <rest-assured.version>4.4.0</rest-assured.version>
+        <slf4j.version>1.7.13</slf4j.version>
+        <jackson.version>2.14.2</jackson.version>
     </properties>
 
     <dependencies>
@@ -90,12 +90,6 @@
             <groupId>org.testng</groupId>
             <artifactId>testng</artifactId>
             <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>jakarta.validation</groupId>
-            <artifactId>jakarta.validation-api</artifactId>
-            <version>3.0.0</version> <!-- Replace with the appropriate version -->
-            <scope>test</scope> <!-- or compile, depending on your project's needs -->
         </dependency>
         <dependency>
             <groupId>org.unitils</groupId>
@@ -313,50 +307,5 @@
                 </plugin>
             </plugins>
         </pluginManagement>
-
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-toolchains-plugin</artifactId>
-                <version>3.0.0</version>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>toolchain</goal>
-                        </goals>
-                        <configuration>
-                            <toolchains>
-                                <jdk>
-                                    <version>${sourceJdk}</version>
-                                </jdk>
-                            </toolchains>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-
-            <plugin>
-                <groupId>com.spotify</groupId>
-                <artifactId>dockerfile-maven-plugin</artifactId>
-                <version>1.4.13</version>
-                <executions>
-                    <execution>
-                        <id>default</id>
-                        <goals>
-                            <goal>build</goal>
-                            <goal>push</goal>
-                        </goals>
-                    </execution>
-                </executions>
-                <configuration>
-                    <repository>docker.io/mehdihasan/${project.artifactId}</repository>
-                    <tag>${project.version}</tag>
-                    <useMavenSettingsForAuth>true</useMavenSettingsForAuth>
-                    <buildArgs>
-                        <JAR_FILE>${project.build.finalName}.${project.packaging}</JAR_FILE>
-                    </buildArgs>
-                </configuration>
-            </plugin>
-        </plugins>
     </build>
 </project>
